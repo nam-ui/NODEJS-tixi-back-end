@@ -36,7 +36,6 @@ const mongoDataMethods = {
             _id: movie._id,
         }, {
             $set: {
-                _id: movie._id,
                 moviesName: movie.moviesName,
                 aliases: movie.aliases,
                 trailer: movie.trailer,
@@ -48,7 +47,7 @@ const mongoDataMethods = {
             }
         })
         _info('MOVIE', 'update movie successfully 😁', movie)
-        return movie
+        return Movie.find()
     }
 
 

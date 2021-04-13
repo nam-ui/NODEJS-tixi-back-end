@@ -1,8 +1,6 @@
 const Movie = require('../models/movie')
 const User = require('../models/user')
-const {
-  gql
-} = require('apollo-server-express');
+const { gql } = require('apollo-server-express');
 
 
 const typeDefs = gql `
@@ -45,9 +43,7 @@ const typeDefs = gql `
         createdAt: String,
       ): Movie
       deleteMovie(_id : ID!): [Movie]
-      updateMovie( _id: ID!, moviesName: String, aliases: String, trailer: String, picture: String, described: String, groupCode: String, launchDate: String, rating:  Int, createdAt: String, ) : Movie
+      updateMovie( _id: ID!, moviesName: String, aliases: String, trailer: String, picture: String, described: String, groupCode: String, launchDate: String, rating:  Int, createdAt: String, ) : [Movie]
     }
 `
-
-
 module.exports = typeDefs
