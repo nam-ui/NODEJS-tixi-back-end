@@ -9,7 +9,15 @@ const resolvers = {
     },
     // ROOT MUITATION
     Mutation: {
-        createMovie: async (parent, args, context) => await context.mongoDataMethods.createMovie(args),
+        createMovie: async (parent, args, context) => {
+           return await context.mongoDataMethods.createMovie(args)
+        },
+        deleteMovie: async (parent, args, context) =>{
+            return await context.mongoDataMethods.deleteMovie(args)
+        },
+        updateMovie: async (parent, args, context) => {
+            return await context.mongoDataMethods.updateMovie(args)
+        }
     },
 
     // TODO conver time

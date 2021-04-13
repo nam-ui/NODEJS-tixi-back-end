@@ -15,8 +15,8 @@ const MONGO_OPTIONS = {
 };
 
 
-const MONGO_USERNAME = process.env.MONGO_USERNAME || 'superuser';
-const MONGO_PASSWORD = process.env.MONGO_PASSWORD || 'supersecretpassword1';
+const MONGO_USERNAME = process.env.MONGO_USERNAME || '';
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD || '';
 const MONGO_HOST = process.env.MONGO_HOST || `mongo-db.luqhv.mongodb.net`;
 const MONGO_HOST_OP = process.env.MONGO_OPTIONS || ''
 

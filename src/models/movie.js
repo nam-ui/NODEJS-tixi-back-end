@@ -8,7 +8,7 @@ const movieSchema = new Schema({
     described: { type: String, },
     groupCode: { type: String, },
     launchDate: { type: Date },
-    rating: { type: Number, },
+    rating: { type: Number, default: 10 },
     createdAt: { type: Date, default: Date.now() },
 })
 module.exports = mongoose.model('movie', movieSchema)
