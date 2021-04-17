@@ -1,4 +1,5 @@
 const Movie = require('../models/movie')
+const argon2 = require('argon2')
 const User = require('../models/user')
 const {
     _debug,
@@ -13,6 +14,39 @@ const mongoDataMethods = {
         _info('USER', 'get users successfully 😁')
         return await User.find()
     },
+    createUser: async user => {
+        const handedPassword = await argon2.hash(user.password);
+        const userCreate = ({
+            username: user.username ,
+            password: handedPassword ,
+        })
+        const newUser = await User(userCreate).save();
+        _info('USER', 'create USER successfully 😁', newUser);
+        return newUser
+    },
+    login: async user => {
+        const newUser = await User.findOne(user,(err,moive)=>{
+        });
+        _info('USER', 'create USER successfully 😁', newUser);
+        return newUser
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // TODO method Movie 
     Movies: async () => {
         _info('MOVIE', 'get movies successfully 😁')
@@ -48,6 +82,14 @@ const mongoDataMethods = {
         })
         _info('MOVIE', 'update movie successfully 😁', movie)
         return Movie.find()
+    },
+    movie: async _id => {
+        return Movie.findById(_id, function (err, movie) {
+            if (!err) {
+                console.log(err);
+            }
+            return movie
+        })
     }
 
 

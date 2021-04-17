@@ -1,4 +1,7 @@
-const { GraphQLScalarType, Kind } = require('graphql');
+const {
+    GraphQLScalarType,
+    Kind
+} = require('graphql');
 
 
 const resolvers = {
@@ -6,18 +9,21 @@ const resolvers = {
     Query: {
         users: async (parent, args, context) => await context.mongoDataMethods.getUsers(),
         movies: async (parent, args, context) => await context.mongoDataMethods.Movies(),
+        movie: async (parent, args, context) => await context.mongoDataMethods.movie(args),
+        // login: async (parent, args, context) => await context.mongoDataMethods
     },
     // ROOT MUITATION
     Mutation: {
         createMovie: async (parent, args, context) => {
-           return await context.mongoDataMethods.createMovie(args)
+            return await context.mongoDataMethods.createMovie(args)
         },
-        deleteMovie: async (parent, args, context) =>{
+        deleteMovie: async (parent, args, context) => {
             return await context.mongoDataMethods.deleteMovie(args)
         },
         updateMovie: async (parent, args, context) => {
             return await context.mongoDataMethods.updateMovie(args)
-        }
+        },
+        createUser: async (parent, args, context) => {return await context.mongoDataMethods.createUser(args)}
     },
 
     // TODO conver time
