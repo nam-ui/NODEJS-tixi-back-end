@@ -1,17 +1,17 @@
 const express = require('express');
 const config = require('./src/configs/configs');
+const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express')
 // TODO mongoose
 const mongoose = require('mongoose')
-
 const mongoDataMethods = require('./src/controllers/dataMethods')
 //TODO apollo server
 const typeDefs = require('./src/schemas/schema')
 const resolvers = require('./src/graphql/resolvers')
 const app = express();
 
-// 
-
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 // TODO connect mongodb
 mongoose
     .connect(config.mongo.url, config.mongo.options)

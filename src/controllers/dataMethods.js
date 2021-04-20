@@ -18,28 +18,22 @@ const mongoDataMethods = {
         const handedPassword = await argon2.hash(user.password);
         const userCreate = ({
             username: user.username ,
-            password: handedPassword ,
+            password: user.password ,
         })
         const newUser = await User(userCreate).save();
         _info('USER', 'create USER successfully 😁', newUser);
         return newUser
     },
     login: async user => {
-        const newUser = await User.findOne(user,(err,moive)=>{
+        const newUser = await User.findOne( { username:user.username , password: user.password }  ,(err,userMongodb)=>{
+            console.log(userMongodb);
         });
+        const dataLogin = {
+            user : newUser
+        }
         _info('USER', 'create USER successfully 😁', newUser);
-        return newUser
+        return dataLogin
     },
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -54,6 +48,9 @@ const mongoDataMethods = {
     },
     createMovie: async movie => {
         console.log(movie);
+        const path = path.join(__dirname, ` /public/images/${filename}` );
+        await 
+
         await Movie(movie).save()
         _info('MOVIE', 'create movie successfully 😁', movie)
         return movie
