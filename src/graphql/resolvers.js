@@ -1,6 +1,4 @@
 const { GraphQLScalarType, Kind} = require('graphql');
-const path = require('path');
-const fs = require('fs');
 
 
 const resolvers = {
@@ -9,6 +7,7 @@ const resolvers = {
         users: async (parent, args, context) => await context.mongoDataMethods.getUsers(),
         movies: async (parent, args, context) => await context.mongoDataMethods.Movies(),
         movie: async (parent, args, context) => await context.mongoDataMethods.movie(args),
+        pagination: async (parent, args, context) => await context.mongoDataMethods.pagination(args),
     },
     // ROOT MUITATION
     Mutation: {

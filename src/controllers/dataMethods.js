@@ -36,21 +36,12 @@ const mongoDataMethods = {
     },
 
 
-
-
-
-
-
     // TODO method Movie 
     Movies: async () => {
         _info('MOVIE', 'get movies successfully 😁')
         return await Movie.find()
     },
     createMovie: async movie => {
-        console.log(movie);
-        const path = path.join(__dirname, ` /public/images/${filename}` );
-        await 
-
         await Movie(movie).save()
         _info('MOVIE', 'create movie successfully 😁', movie)
         return movie
@@ -87,11 +78,18 @@ const mongoDataMethods = {
             }
             return movie
         })
-    }
-
-
-
-
+    },
+  // TODO method  Pagination
+  pagination: async pages  =>{
+    const startIndex = (pages.page - 1) * pages.pageSize;
+    const movies = Movie.find().limit(pages.pageSize).skip(startIndex);
+    const totalPage =  Math.ceil(await Movie.estimatedDocumentCount() / pages.pageSize );
+    return {
+        page: pages.page ,
+        pageSize: pages.pageSize ,
+        totalPage:  totalPage ,        
+        movies: movies
+   };
+  }
 }
-
 module.exports = mongoDataMethods
