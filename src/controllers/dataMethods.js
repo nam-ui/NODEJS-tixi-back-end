@@ -1,12 +1,15 @@
 const Movie = require('../models/movie')
 const argon2 = require('argon2')
 const User = require('../models/user')
+
 const {
     _debug,
     _info,
     _error,
     _warn
 } = require('../configs/logging')
+
+
 
 const mongoDataMethods = {
     // TODO method User
@@ -17,19 +20,22 @@ const mongoDataMethods = {
     createUser: async user => {
         const handedPassword = await argon2.hash(user.password);
         const userCreate = ({
-            username: user.username ,
-            password: user.password ,
+            username: user.username,
+            password: user.password,
         })
         const newUser = await User(userCreate).save();
         _info('USER', 'create USER successfully 😁', newUser);
         return newUser
     },
     login: async user => {
-        const newUser = await User.findOne( { username:user.username , password: user.password }  ,(err,userMongodb)=>{
+        const newUser = await User.findOne({
+            username: user.username,
+            password: user.password
+        }, (err, userMongodb) => {
             console.log(userMongodb);
         });
         const dataLogin = {
-            user : newUser
+            user: newUser
         }
         _info('USER', 'create USER successfully 😁', newUser);
         return dataLogin
@@ -79,17 +85,24 @@ const mongoDataMethods = {
             return movie
         })
     },
-  // TODO method  Pagination
-  pagination: async pages  =>{
-    const startIndex = (pages.page - 1) * pages.pageSize;
-    const movies = Movie.find().limit(pages.pageSize).skip(startIndex);
-    const totalPage =  Math.ceil(await Movie.estimatedDocumentCount() / pages.pageSize );
-    return {
-        page: pages.page ,
-        pageSize: pages.pageSize ,
-        totalPage:  totalPage ,        
-        movies: movies
-   };
-  }
+    findMovie: async moviesName => {
+        const search = moviesName.moviesName;
+        // return Movie.find( { 
+        //     $text: { $search: search } ,
+        // } ).fetch()
+        return Movie.find({"moviesName": {$regex: ".*" + search + ".*"}});
+    },
+    // TODO method  Pagination
+    pagination: async pages => {
+        const startIndex = (pages.page - 1) * pages.pageSize;
+        const movies = Movie.find().limit(pages.pageSize).skip(startIndex);
+        const totalPage = Math.ceil(await Movie.estimatedDocumentCount() / pages.pageSize);
+        return {
+            page: pages.page,
+            pageSize: pages.pageSize,
+            totalPage: totalPage,
+            movies: movies
+        };
+    }
 }
 module.exports = mongoDataMethods

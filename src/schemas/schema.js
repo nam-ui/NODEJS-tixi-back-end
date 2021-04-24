@@ -43,6 +43,7 @@ const typeDefs = gql `
       movies : [Movie]
       movie( _id: ID!) : Movie
       pagination( page: Int! , pageSize: Int!  ): Pagination
+    
     }
     type Mutation {
       createMovie(
@@ -60,6 +61,8 @@ const typeDefs = gql `
       updateMovie( _id: ID!, moviesName: String, aliases: String, trailer: String, picture: String, described: String, groupCode: String, launchDate: String, rating:  Int, createdAt: String, ) : [Movie]
       createUser( username: String! , password: String!) : User
       login( username: String! , password: String!) : Login
+      findMovie(  moviesName: String! ) : [Movie]
     }
 `
+
 module.exports = typeDefs

@@ -13,4 +13,5 @@ const movieSchema = new Schema({
     rating: { type: Number, default: 10 },
     createdAt: { type: Date, default: Date.now() },
 })
+movieSchema.index({moviesName : 'text' , aliases:'text'});
 module.exports = mongoose.model('movie', movieSchema)

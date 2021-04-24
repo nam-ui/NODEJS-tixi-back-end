@@ -21,10 +21,11 @@ const resolvers = {
             return await context.mongoDataMethods.updateMovie(args)
         },
         createUser: async (parent, args, context) => {return await context.mongoDataMethods.createUser(args)},
+        
+        login: async (parent, args, context) => await context.mongoDataMethods.login(args),
 
-        login: async (parent, args, context) => await context.mongoDataMethods.login(args)
+        findMovie: async (parent, args, context) => await context.mongoDataMethods.findMovie(args),
     },
-
     // TODO conver time
     DateTime: new GraphQLScalarType({
         name: 'DateTime',
