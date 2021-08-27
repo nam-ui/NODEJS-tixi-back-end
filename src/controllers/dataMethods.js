@@ -1,6 +1,8 @@
 const Movie = require('../models/movie')
 const argon2 = require('argon2')
+
 const User = require('../models/user')
+const Image = require('../models/image')
 
 const {
     _debug,
@@ -13,10 +15,10 @@ const {
 
 const mongoDataMethods = {
     // TODO method User
-    getUsers: async () => {
-        _info('USER', 'get users successfully 😁')
-        return await User.find()
-    },
+        getUsers: async () => {
+            _info('USER', 'get users successfully 😁')
+            return await User.find()
+        },
     createUser: async user => {
         const handedPassword = await argon2.hash(user.password);
         const userCreate = ({
@@ -87,9 +89,9 @@ const mongoDataMethods = {
     },
     findMovie: async moviesName => {
         const search = moviesName.moviesName;
-        // return Movie.find( { 
-        //     $text: { $search: search } ,
-        // } ).fetch()
+        if(search === '') {
+            return []
+        }
         return Movie.find({"moviesName": {$regex: ".*" + search + ".*"}});
     },
     // TODO method  Pagination
@@ -103,6 +105,16 @@ const mongoDataMethods = {
             totalPage: totalPage,
             movies: movies
         };
+    },
+
+
+    uploadFile:async picture => {
+        console.log(picture);
+
     }
+
+
+
+
 }
 module.exports = mongoDataMethods

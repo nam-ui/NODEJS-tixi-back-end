@@ -25,6 +25,9 @@ const resolvers = {
         login: async (parent, args, context) => await context.mongoDataMethods.login(args),
 
         findMovie: async (parent, args, context) => await context.mongoDataMethods.findMovie(args),
+
+        uploadFile: async (parent, args, context) => await context.mongoDataMethods.uploadImage(args),
+
     },
     // TODO conver time
     DateTime: new GraphQLScalarType({
