@@ -40,6 +40,7 @@ app.listen(config.server.port, () => {
     console.log(`🚀 ApolloServer already at` + ` http://localhost:${config.server.port}${server.graphqlPath} ✅ ✅ `)
     console.log(`🚀 Server already a http://${config.server.hostname}:${config.server.port} ✅ ✅ ✅`)
     console.log(`🚀 https://cloud.mongodb.com/v2/6069bc834e865c6b1f43a400#metrics/replicaSet/6069bd87ed7de870c1f0ebe8/explorer `)
+    console.log(`🚀 Heroku  : https://tixi-movie-heroku.herokuapp.com/ `)
 })
 
 
