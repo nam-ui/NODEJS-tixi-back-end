@@ -1,5 +1,4 @@
 const Movie = require('../models/movie')
-const argon2 = require('argon2')
 
 const User = require('../models/user')
 const Image = require('../models/image')
@@ -20,7 +19,6 @@ const mongoDataMethods = {
             return await User.find()
         },
     createUser: async user => {
-        const handedPassword = await argon2.hash(user.password);
         const userCreate = ({
             username: user.username,
             password: user.password,
