@@ -41,7 +41,9 @@ app.get('/', async (req, res) => {
     res.json(messages);
 })
 
-app.listen(config.server.port || 5030, () => {
+app.listen({
+    port: process.env.PORT || 5030
+}, () => {
     console.log(`🚀 Express server started on port: ${config.server.port} ✅ `);
     console.log(`🚀 ApolloServer already at` + ` http://localhost:${config.server.port}${server.graphqlPath} ✅ ✅ `)
     console.log(`🚀 Server already a http://${config.server.hostname}:${config.server.port} ✅ ✅ ✅`)
