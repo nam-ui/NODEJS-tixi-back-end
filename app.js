@@ -31,8 +31,14 @@ server.applyMiddleware({ app })
 
 
 // TODO get(/) and start server
+console.log(config.server.port);
 app.get('/', async (req, res) => {
-    res.json("hello world!");
+    const messages = ("🚀 Express server started on port:  ✅" + `${process.env.PORT||5030}` +
+        "🚀 ApolloServer already at http://localhost:5030/graphql ✅ ✅   " +
+        "🚀 Server already a http://localhost:5030 ✅ ✅ ✅" +
+        "🚀 https://cloud.mongodb.com/v2/60e6cbefc357547a487e82cc#clusters " +
+        "🚀 Heroku  : https://tixi-movie-heroku.herokuapp.com/");
+    res.json(messages);
 })
 
 app.listen(config.server.port || 5030, () => {
